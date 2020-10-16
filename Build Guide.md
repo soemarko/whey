@@ -16,6 +16,8 @@ To get it working as close as HX711 in terms of usage, just follow exactly below
 
 You'll need 5 pins out of the ESP32, 2 of them are 3.3V and GND. 3 are connected to PDMN, DOUT, and SCLK. So here are the connection from top left, counter-clock wise.
 
+![ADS1232](images/IMG20201007162124.jpg?raw=true)
+
 - AINP2, and AINN2 (2nd signal, ignore it).
 - AINP1, and AINN1: signal voltage from load cell (usually green and white, doesn't matter if you switched it around, calibration will fix it).
 - CLK, A0, TEMP, GND all connected together to GND on ESP32. You can just blob it together.
