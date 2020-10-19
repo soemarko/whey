@@ -26,7 +26,9 @@ You'll need 5 pins out of the ESP32, 2 of them are 3.3V and GND. 3 are connected
 
 ## TTGO Mini32 and LiPo Battery
 
-Main reason I went with the Mini32 because it has BLE (not used at the moment), and it has the LiPo battery charging circuit built in. Expose the micro USB port, then I can recharge or flash updates without opening the box. I just made a simple voltage divider out of 2 pin and 3 pin male JST, the one pin to read battery level.
+Main reason I went with the Mini32 because it has BLE (not used at the moment), and it has the LiPo battery charging circuit built in. Expose the micro USB port, then I can recharge or flash updates without opening the box. I just made a simple voltage divider out of 2 pin and 3 pin male JST (pictured below), the one pin to read battery level.
+
+![Voltage Divider](images/voltage-divider.jpg?raw=true)
 
 ## OLED and Buttons
 
