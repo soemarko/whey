@@ -20,11 +20,11 @@ However the grand scheme is basically still the same as v1.0, this time just don
 
 ### Todo
 
-☑ Design ADS1232 breakout board with filters
-☐ Order and test the PCB
-☑ Wireless comm between the plate and display with [ESP Now](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_now.html)?
-☐ Use 18650 battery for the plate? Voltage divider setup on v1 isn't accurate enough.
-☐ Find ESP32 for the plate (either the Mini32 like the one used for v1, or random long but thin TTGO I found -- depends on enclosure design)
+☑ Design ADS1232 breakout board with filters\
+☐ Order and test the PCB\
+☑ Wireless comm between the plate and display with [ESP Now](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_now.html)?\
+☐ Use 18650 battery for the plate? Voltage divider setup on v1 isn't accurate enough.\
+☐ Find ESP32 for the plate (either the Mini32 like the one used for v1, or random long but thin TTGO I found -- depends on enclosure design)\
 ☑ TTGO T-Display for the screen:Has internal battery management. Great display. Has 2 buttons built-in
 
 ## Credits
