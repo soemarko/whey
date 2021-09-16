@@ -39,6 +39,8 @@ void setup() {
 }
 
 void loop() {
+  espnow_loop();
+  
 	button_loop();
 	screen_loop();
 

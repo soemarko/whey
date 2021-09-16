@@ -3,10 +3,10 @@
 
 int32_t tareOffset = 0;
 float calFactor = 1.0;
-
+bool autoCalibrate  = false;
 
 typedef struct struct_message {
-    long value;
+    int32_t value;
 } struct_message;
 
 struct_message myData;
@@ -15,6 +15,7 @@ struct_message myData;
 void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   memcpy(&myData, incomingData, sizeof(myData));
   weight = raw_to_unit(myData.value);
+  if (autoCalibrate) autoCalibration();
 }
 
 void espnow_setup() {
@@ -33,11 +34,33 @@ void espnow_setup() {
   esp_now_register_recv_cb(OnDataRecv);
 }
 
+void espnow_loop() {
+	
+}
+
 // ***************** WEIGHT
 
 void tare() {
 	tareOffset = myData.value;
 }
+
+void autoCalibration() {
+	if(weight >= -0.001 || weight <= 0.001) {
+		// auto calibration complete
+		autoCalibrate  = false;
+		return;
+	}
+	
+	if (weight > 0.0) {
+		//increase calfactor
+		calFactor = calFactor + 1;
+	}
+	else {
+		//decrease calfactor
+		calFactor = calFactor - 1;
+	}
+}
+
 
 void calibrate(TFT_eSPI tft) {
 	calFactor = 1.0;

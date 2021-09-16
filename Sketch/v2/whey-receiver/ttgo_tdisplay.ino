@@ -87,7 +87,7 @@ void screen_init() {
 void screen_loop() {
 	// voltage: 5.04 charged. Don't let it get below 3.25!
 	float v = getVoltage();
-	int ypos = tft.height()-25;
+	int ypos = tft.height()-tft.fontHeight(4);
 	if(v < 3.5) {
 		tft.setTextColor(0xF800, TFT_BLACK); // red
 		tft.drawString("LOW      ", 0, ypos, 4);
@@ -125,4 +125,10 @@ String getTimer() {
 	char str[20];
 	sprintf(str, "%02d:%02d", seconds/60, seconds%60);
 	return String(str);
+}
+
+float roundToDecimal(double value, int dec) {
+  double mlt = powf( 10.0f, dec );
+  value = roundf( value * mlt ) / mlt;
+  return (float)value;
 }
