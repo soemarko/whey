@@ -42,11 +42,12 @@ void button_init() {
 		tft.setTextSize(2);
 		tft.drawString("Goodbye...", tft.width() / 2, tft.height() / 2 );
 		delay(2500);
-		digitalWrite(TFT_BL, !r);
+		tft.fillScreen(TFT_BLACK);
 
+		digitalWrite(TFT_BL, !r);
 		tft.writecommand(TFT_DISPOFF);
 		tft.writecommand(TFT_SLPIN);
-//		rtc_gpio_isolate(GPIO_SEL_35);
+
 		esp_sleep_enable_ext0_wakeup(GPIO_NUM_35, 0);
 		esp_deep_sleep_start();
 	});
