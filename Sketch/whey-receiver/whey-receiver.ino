@@ -15,6 +15,7 @@ void IRAM_ATTR onTimer() {
 	portEXIT_CRITICAL_ISR(&timerMux);
 }
 
+int precision = 1;
 float weight = 0.0;
 
 void setup() {

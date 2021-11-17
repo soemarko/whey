@@ -1,8 +1,6 @@
 #include "esp_adc_cal.h"
 #include <Button2.h>
 
-// ***************** GLOBALS
-
 #define ADC_PIN 34
 #define BUTTON_1_PIN 35
 #define BUTTON_2_PIN 0
@@ -12,6 +10,8 @@ TFT_eSPI tft = TFT_eSPI(135, 240);
 
 Button2 btn1(BUTTON_1_PIN);
 Button2 btn2(BUTTON_2_PIN);
+
+float prevWeight = 0.f;
 
 float getVoltage() {
     uint16_t v = analogRead(ADC_PIN);
@@ -41,7 +41,7 @@ void button_init() {
 		tft.setTextFont(1);
 		tft.setTextSize(2);
 		tft.drawString("Goodbye...", tft.width() / 2, tft.height() / 2 );
-		delay(2500);
+		delay(1500);
 		tft.fillScreen(TFT_BLACK);
 
 		digitalWrite(TFT_BL, !r);
@@ -106,7 +106,7 @@ void screen_loop() {
 	  tft.setTextColor(0x7E0, TFT_BLACK); // green
 		tft.drawString("FULL      ", 0, ypos, 4);
 	}
-	else if(v > 4.7) {
+	else if(v > 4.3) {
 	  tft.setTextColor(0xFFE0, TFT_BLACK); // yellow
 		tft.drawString("CHRG      ", 0, ypos, 4);
 	}
@@ -114,10 +114,11 @@ void screen_loop() {
 	  tft.setTextColor(0xBDF7, TFT_BLACK); // light grey
 		tft.drawString("                 ", 0, ypos, 4);
 	}
+//	Serial.println(v);
 
 	// weight
   tft.setTextColor(0xFBE0, TFT_BLACK);
-  int xpos = tft.drawFloat(weight, 2, 0, 2, 7);
+  int xpos = tft.drawFloat(getWeight(), precision, 0, 2, 7);
   tft.drawString("           ", xpos, 2, 7);
 
 	// timer
@@ -137,8 +138,21 @@ String getTimer() {
 	return String(str);
 }
 
-float roundToDecimal(double value, int dec) {
-  double mlt = powf( 10.0f, dec );
-  value = roundf( value * mlt ) / mlt;
-  return (float)value;
+/* Smoothing and stabilize weight output */
+
+float getWeight() {
+  double mlt = powf( 10.0f, precision );
+  float value = roundf( weight * mlt ) / mlt;
+
+	if( fabs(value - prevWeight) > 0.01 ) {  // only picks up changes if the delta is bigger than 0.01
+		prevWeight = value;
+	}
+
+	weight = prevWeight;
+
+	if( fabs(weight) <= 0.01 ) { // removes wobbles around 0.01
+		weight = 0;
+	}
+  
+  return weight;
 }

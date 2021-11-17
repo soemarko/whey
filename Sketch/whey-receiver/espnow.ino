@@ -1,9 +1,11 @@
 #include <esp_now.h>
 #include <WiFi.h>
+#include <EEPROM.h>
 
 int32_t tareOffset = 0;
 float calFactor = 1.0;
 bool autoCalibrate  = false;
+bool isFirstData = true;
 
 typedef struct struct_message {
     int32_t value;
@@ -14,6 +16,12 @@ struct_message myData;
 // callback function that will be executed when data is received
 void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   memcpy(&myData, incomingData, sizeof(myData));
+
+	if (isFirstData) {
+		tareOffset = myData.value;
+		isFirstData = false;
+	}
+  
   weight = raw_to_unit(myData.value);
   if (autoCalibrate) autoCalibration();
 }
@@ -32,6 +40,14 @@ void espnow_setup() {
   }
 
   esp_now_register_recv_cb(OnDataRecv);
+  
+	EEPROM.begin(sizeof(float));
+	float f = 1;
+	EEPROM.get(0, f);
+	if(!isnan(f)) {
+		calFactor = f;
+	}
+	
 }
 
 void espnow_loop() {
@@ -82,6 +98,10 @@ void calibrate(TFT_eSPI tft) {
 	calFactor = (myData.value - tareOffset) / 100.0;
 	Serial.println("done");
 	tft.print("\n\n        Done.");
+
+	EEPROM.put(0, calFactor);
+	EEPROM.commit();
+	
 	delay(1000);
   tft.fillScreen(TFT_BLACK);
 }
