@@ -1,10 +1,10 @@
 # Whey v2.0
 
-DIY coffee scale / load cell controller. Each directory will have their own `readme ` files, or at least I plan to.
+DIY coffee scale / load cell controller. Each directory will have their own `readme` files.
 
-![pcb](media/pcb.jpeg?raw=true)
+[![pcb](media/whey-v2.0.jpg?raw=true)](https://youtu.be/54p8B-DXDt8)
 
-Prototype in action: https://gfycat.com/delectablewellinformedlaughingthrush
+Video of it in action: https://youtu.be/54p8B-DXDt8
 
 ## Updates
 
@@ -35,7 +35,9 @@ The Oak uses under 60mA while broadcasting random long values. This shouldn't be
 ☐ Battery indicator for the plate?\
 ☑ ~~Find ESP32 for the plate (either the Mini32 like the one used for v1, or random long but thin TTGO I found -- depends on enclosure design)~~ Using Digistump Oak, basically a small ESP8266\
 ☑ TTGO T-Display for the screen: Has internal battery management. Great display. Has 2 buttons built-in\
-☐ Add readme file in each directories for more specific discussion.
+☐ Add readme file in each directories for more specific discussion.\
+☐ Add another plate with 3kg load cell\
+☐ Add support for multiple plates (at least 2) to screen
 
 ## Credits
 
