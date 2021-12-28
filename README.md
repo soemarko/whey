@@ -6,18 +6,18 @@ DIY coffee scale / load cell controller.
 
 Video of it in action: https://youtu.be/54p8B-DXDt8
 
-## Updates
-
-- 29 Dec 2021: Officially release v2.0. Removed checked todo list.
-
-Whey v2.0 is a wireless 2-piece hardware that is separated between the sensor plate and the display screen. This project currently uses 500g load cell, with ADS1232 analog to digital converter. It uses ESP-Now to communicate between each microcontrollers. More specific information are available in each directories.
+Whey v2.0 is a wireless 2-piece hardware that is separated between the sensor plate and the display screen. This project currently uses 500g load cell, with ADS1232 analog to digital converter. It uses ESP-Now to communicate between each microcontrollers. More specific information are available in each directories. The story behind this are available in [my blog](https://soemarko.com/blog/whey-v2.0), everything is linked all the way back to [the very first iteration](https://youtu.be/TIj6iEEiVVo).
 
 ### Todo
 
 ☑ Add readme file in each directories for more specific discussion.\
 ☐ Battery indicator for the plate?\
-☐ Add another plate with 3kg load cell\
+☐ Make another plate with 3kg load cell\
 ☐ Add support for multiple plates (at least 2) to screen
+
+## Updates
+
+- 29 Dec 2021: Officially release v2.0
 
 ## Credits
 
