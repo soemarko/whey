@@ -6,6 +6,8 @@ I'm using it to simplify things. The STL is from https://www.thingiverse.com/thi
 
 ## Plate
 
+![enclosure](../media/fusion360.png?raw=true)
+
 This is a tricky one. I haven't been able to remove wobbles when doing everything in plastic. So I got myself a cheapo, bottom of the barrel, 3018 CNC machine, and just slowly machine 2mm aluminium. The containing folders are the materials I used for my plate.
 
 ### Aluminium
