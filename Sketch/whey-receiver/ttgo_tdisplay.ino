@@ -11,6 +11,8 @@ TFT_eSPI tft = TFT_eSPI(135, 240);
 Button2 btn1(BUTTON_1_PIN);
 Button2 btn2(BUTTON_2_PIN);
 
+int lowVoltageCount = 0;
+
 float prevWeight = 0.f;
 
 float getVoltage() {
@@ -99,20 +101,28 @@ void screen_loop() {
 //	tft.drawFloat(v, 2, 0, ypos, 4);
 
 	if(v < 3.5) {
-		tft.setTextColor(0xF800, TFT_BLACK); // red
-		tft.drawString("LOW      ", 0, ypos, 4);
+		if(lowVoltageCount < 50) {
+			lowVoltageCount += 1;
+		}
+		else {
+			tft.setTextColor(0xF800, TFT_BLACK); // red
+			tft.drawString("LOW      ", 0, ypos, 4);
+		}
 	}
 	else if(v > 5.0) {
 	  tft.setTextColor(0x7E0, TFT_BLACK); // green
 		tft.drawString("FULL      ", 0, ypos, 4);
+		lowVoltageCount = 0;
 	}
 	else if(v > 4.3) {
 	  tft.setTextColor(0xFFE0, TFT_BLACK); // yellow
 		tft.drawString("CHRG      ", 0, ypos, 4);
+		lowVoltageCount = 0;
 	}
 	else {
 	  tft.setTextColor(0xBDF7, TFT_BLACK); // light grey
 		tft.drawString("                 ", 0, ypos, 4);
+		lowVoltageCount = 0;
 	}
 //	Serial.println(v);
 
