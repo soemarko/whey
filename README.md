@@ -11,7 +11,7 @@ Whey v2.0 is a wireless 2-piece hardware that is separated between the sensor pl
 ### Known Issue
 
 - No battery indicator on the plate -- I just have a powerbank ready when it's not turning on
-- TFT_eSPI library only works with the one from [TTGO T-Display repo](https://github.com/Xinyuan-LilyGO/TTGO-T-Display), but won't compile when using the latest one by [Bodmer](https://github.com/Bodmer/TFT_eSPI).
+- ~~TFT_eSPI library only works with the one from [TTGO T-Display repo](https://github.com/Xinyuan-LilyGO/TTGO-T-Display), but won't compile when using the latest one by [Bodmer](https://github.com/Bodmer/TFT_eSPI)~~. Fixed: see Sketch readme.
 
 ### Todo
 

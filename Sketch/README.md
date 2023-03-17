@@ -7,7 +7,7 @@ At minimum you'll need a screen, and two buttons. I'm using TTGO T-Display to av
 ### Button 1 / Top / Pin 35
 
 - Single click: tare
-- Click and hold: re-calibrate (I'm using 100g known weight, adjust the sketch if you use other)
+- Click and hold: re-calibrate (I'm using 100g known weight, adjust the `KNOWN_WEIGHT` in file `espnow.ino`)
 - Double click: deep sleep
 
 ### Button 2 / Bottom / Pin 0
@@ -15,6 +15,10 @@ At minimum you'll need a screen, and two buttons. I'm using TTGO T-Display to av
 - Single click: start / pause timer. Timer start at -3 and counting up, this is to give me time to do other things and still able to start the brew at 00:00.
 - Click and Hold: reset timer.
 - Double click: N/A
+
+### Known Issue
+
+When using the TTGO T-Display, if you're using the latest TFT_eSPI library by Bodmer instead of the one from TTGO T-Display repo, don't forget to set the `User_Setup_Select.h` file. Remove / comment out line 22 `//#include <User_Setup.h>`, then uncomment line 53 `#include <User_Setups/Setup25_TTGO_T_Display.h>`. Then everything should compile normally.
 
 ## Sender / Plate
 

@@ -2,6 +2,8 @@
 #include <WiFi.h>
 #include <EEPROM.h>
 
+#define KNOWN_WEIGHT 100.0
+
 int32_t tareOffset = 0;
 float calFactor = 1.0;
 bool autoCalibrate  = false;
@@ -95,7 +97,7 @@ void calibrate(TFT_eSPI tft) {
 		delay(1000);
 	}
 
-	calFactor = (myData.value - tareOffset) / 100.0;
+	calFactor = (myData.value - tareOffset) / KNOWN_WEIGHT;
 	Serial.println("done");
 	tft.print("\n\n        Done.");
 

@@ -11,7 +11,8 @@ TFT_eSPI tft = TFT_eSPI(135, 240);
 Button2 btn1(BUTTON_1_PIN);
 Button2 btn2(BUTTON_2_PIN);
 
-int lowVoltageCount = 0;
+int voltageThres = 250;
+int voltageCount = 0;
 
 float prevWeight = 0.f;
 
@@ -98,31 +99,36 @@ void screen_loop() {
 	// voltage: 5.04 charged. Don't let it get below 3.25!
 	float v = getVoltage();
 	int ypos = tft.height()-tft.fontHeight(4);
-//	tft.drawFloat(v, 2, 0, ypos, 4);
+	Serial.println(v);
 
 	if(v < 3.5) {
-		if(lowVoltageCount < 50) {
-			lowVoltageCount += 1;
+		if(voltageCount < voltageThres) {
+			voltageCount += 1;
 		}
 		else {
 			tft.setTextColor(0xF800, TFT_BLACK); // red
 			tft.drawString("LOW      ", 0, ypos, 4);
 		}
 	}
-	else if(v > 5.0) {
-	  tft.setTextColor(0x7E0, TFT_BLACK); // green
-		tft.drawString("FULL      ", 0, ypos, 4);
-		lowVoltageCount = 0;
+	else if(v >= 5) {
+		if(voltageCount < voltageThres) {
+			voltageCount += 1;
+		}
+		else {
+		  tft.setTextColor(0x7E0, TFT_BLACK); // green
+			tft.drawString("FULL      ", 0, ypos, 4);
+			voltageCount = 0;
+		}
 	}
 	else if(v > 4.3) {
 	  tft.setTextColor(0xFFE0, TFT_BLACK); // yellow
 		tft.drawString("CHRG      ", 0, ypos, 4);
-		lowVoltageCount = 0;
+		voltageCount = 0;
 	}
 	else {
 	  tft.setTextColor(0xBDF7, TFT_BLACK); // light grey
 		tft.drawString("                 ", 0, ypos, 4);
-		lowVoltageCount = 0;
+		voltageCount = 0;
 	}
 //	Serial.println(v);
 
